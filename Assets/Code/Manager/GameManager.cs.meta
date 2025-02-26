@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a56ed7079953a49488481fcef5ff4ced
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - levelOne: {fileID: 11400000, guid: 52e07ca89511eeb44afb248aae2e5c51, type: 2}
+  - levelTwo: {fileID: 11400000, guid: 83f4b97ba946c1e4a871be3b28c189a2, type: 2}
+  - levelThree: {fileID: 11400000, guid: 25d9cb2d2cf853042b83fa4b2f659c49, type: 2}
+  - bossLevel: {fileID: 11400000, guid: 0beb0fbf66b9f664b9885378b4e93dda, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
