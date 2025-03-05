@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61d93449d6864ba46b1869d60e62ab10, type: 3}
+  m_Name: PlayerData
+  m_EditorClassIdentifier: 
+  health: 3
+  spawnPoint: {x: 0, y: 0, z: 0}
+  agentSpeed: 8
+  jumpForce: 12
+  lowJumpMultiplier: 3
+  gravity_Modifier: 4
+  doubleJumpForce: 14
+  maxJumps: 1
+  jumpCount: 1
+  currentVelocity: {x: 0, y: 0.000009384165}
+  minZoom: 8
+  maxZoom: 11
