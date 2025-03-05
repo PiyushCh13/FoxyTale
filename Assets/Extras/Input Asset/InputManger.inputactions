@@ -18,18 +18,9 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "5b0e9226-8465-4a13-b319-c4853cf50f22",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "Hold(duration=0.01,pressPoint=0.4)",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Double Jump",
-                    "type": "Button",
-                    "id": "5742ab03-191f-49df-86e1-5e826b5ee650",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "MultiTap(tapTime=0.3,tapDelay=0.3,pressPoint=0.3)",
                     "initialStateCheck": false
                 }
             ],
@@ -121,28 +112,6 @@
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ca809539-dec7-4ab9-9d2e-fbc47deb0ac5",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Double Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4e823221-f09a-42ee-8b71-3b0fa58c5af1",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Double Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         },
@@ -154,7 +123,7 @@
                     "name": "Press",
                     "type": "Button",
                     "id": "3a1b0a7a-53af-4e4d-9c90-81b858534429",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "Tap",
                     "initialStateCheck": false
@@ -172,7 +141,7 @@
                     "name": "SelectLevel",
                     "type": "Button",
                     "id": "71338a16-b6e7-411c-abba-9c3b58456ea5",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false

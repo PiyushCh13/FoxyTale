@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
     public Vector2 movementVector { get; private set; }
-    public event Action OnJumpPressed, OnCrouchPressed, OnCrouchReleased,OnJumpReleased, OnDoubleJump;
+    public event Action OnJumpPressed,OnJumpReleased, OnDoubleJump;
     public event Action<Vector2> OnMovementVector;
     public event Action OnPress;
 
@@ -45,20 +45,6 @@ public class InputManager : MonoBehaviour
             OnDoubleJump?.Invoke();
         }
     }
-
-    public void Crouch(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            OnCrouchPressed?.Invoke();
-        }
-
-        if (context.canceled)
-        {
-            OnCrouchReleased?.Invoke();
-        }
-    }
-
     public void GetMovementVector(InputAction.CallbackContext context)
     {
         movementVector = new Vector2(context.ReadValue<Vector2>().x, 0);

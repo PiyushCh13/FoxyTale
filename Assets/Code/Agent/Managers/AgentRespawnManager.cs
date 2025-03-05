@@ -22,7 +22,7 @@ public class AgentRespawnManager : MonoBehaviour
 
     public void SetSpawnPoint(Player_Controller controller)
     {
-        currentSpawnPoint = controller.agentData.spawnPoint;
+        currentSpawnPoint = controller.playerData.spawnPoint;
     }
 
     public void InitializeSpawnPoint(Vector3 spawnPoint , Vector3 toSpawnPoint)
