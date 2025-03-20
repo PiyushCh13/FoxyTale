@@ -1,29 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Profiling;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelEnd : MonoBehaviour
 {
-    [SerializeField] public LevelList nextLevel,currentLevel;
+    [SerializeField] public LevelList nextLevel, currentLevel;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            // Agent agent = collision.gameObject.GetComponent<Agent>();
+            SFXManager.Instance.PlaySound(SFXManager.Instance.levelVictory);
 
-            // if (agent != null)
-            // {
-            //     SceneManagement.Instance.LoadScene(agent.rawImage, SceneList.LevelSelection.ToString());
-            // }
+            if (currentLevel == LevelList.BossLevel)
+            {
+                SceneManagement.Instance.LoadScene(collision.gameObject.GetComponent<Player_Controller>().rawImage, SceneList.GameComplete.ToString());
+            }
 
-            // LevelDataSO currentLeveldata = LevelDataManager.Instance.GetLevelData(currentLevel);
-            // currentLeveldata.diamondsCollected = GameManager.Instance.collectedGems;
+            else
+            {
+                Player_Controller player = collision.gameObject.GetComponent<Player_Controller>();
+                PlayerCollectibleManager playerCollectibleManager = collision.gameObject.GetComponent<PlayerCollectibleManager>();
 
-            // LevelDataSO nextLeveldata = LevelDataManager.Instance.GetLevelData(nextLevel);
-            // nextLeveldata.isUnlocked = true;
+                if (player != null)
+                {
+                    SceneManagement.Instance.LoadScene(player.rawImage, SceneList.LevelSelection.ToString());
+                }
 
-            // GameManager.Instance.AddUnlockLevel(nextLevel);
+                LevelDataSO currentLeveldata = new LevelDataSO();
+                currentLeveldata.diamondsCollected = Mathf.Clamp(0, playerCollectibleManager.gemCount, currentLeveldata.diamondsTotal);
+                currentLeveldata.isUnlocked = true;
+
+                LevelDataSO nextLevelData = new LevelDataSO();
+                nextLevelData.isUnlocked = true;
+
+                LevelDataManager.Instance.UpdateLevelData(currentLevel, currentLeveldata);
+
+                LevelDataManager.Instance.UpdateLevelData(nextLevel, nextLevelData);
+
+                GameManager.Instance.AddUnlockLevel(nextLevel);
+                GameManager.Instance.SaveLevelData(currentLevel);
+            }
         }
     }
+
+
 }

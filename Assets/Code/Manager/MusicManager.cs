@@ -7,7 +7,6 @@ public class MusicManager : Singleton<MusicManager>
     public AudioSource musicSource;
 
     [SerializeField] public AudioClip bossBattle;
-    [SerializeField] public AudioClip LevelVictory;
     [SerializeField] public AudioClip mainLevel;
     [SerializeField] public AudioClip menuSong;
 
@@ -25,5 +24,12 @@ public class MusicManager : Singleton<MusicManager>
             musicSource.Play();
         }
     }
+
+    public void StopMusic()
+    {
+        musicSource.Stop();
+    }
+
+
 
 }

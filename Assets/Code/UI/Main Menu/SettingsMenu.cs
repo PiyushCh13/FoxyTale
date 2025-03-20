@@ -24,4 +24,14 @@ public class SettingsMenu : MonoBehaviour
         UIManager.Instance.AnimateMenu(this.gameObject, Vector3.zero);
         this.gameObject.SetActive(false);
     }
+
+    public void MusicSlider()
+    {
+        MusicManager.Instance.musicSource.volume = musicSlider.value;
+    }
+
+    public void SFXSlider()
+    {
+        SFXManager.Instance.sfxAudioSource.volume = sfxSlider.value;
+    }
 }

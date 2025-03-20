@@ -27,11 +27,6 @@ public class Checkpoint : MonoBehaviour
         }
     }
 
-    // public void SetAgentPosition(Agent agent)
-    // {
-    //     agent.agentData.spawnPoint = transform.position;
-    // }
-
     public void ActivateSprite()
     {
         _spriteRenderer.sprite = checkpointOnSprite;

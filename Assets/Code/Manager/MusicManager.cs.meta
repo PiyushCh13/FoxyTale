@@ -3,7 +3,12 @@ guid: bfd3a8efc40b0434c9fb2d3707a3aaa1
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - musicSource: {instanceID: 0}
+  - bossBattle: {fileID: 8300000, guid: 2dfafa64e9333aa42a754b34cf0840be, type: 3}
+  - LevelVictory: {instanceID: 0}
+  - mainLevel: {fileID: 8300000, guid: bfaf43c0dfe33994fa2ce257ba1e2df6, type: 3}
+  - menuSong: {fileID: 8300000, guid: 384cc4857e023e04da98729b9f08f983, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

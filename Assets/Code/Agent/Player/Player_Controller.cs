@@ -4,44 +4,31 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
+using System.Collections;
 public class Player_Controller : MonoBehaviour
 {
     [Header("Player Components")]
     private Animator player_Anim;
     private Rigidbody2D player_RB;
     private SpriteRenderer player_SR;
-
-    [Space]
-
-    [Header("Player Data")]
-    public PlayerDataSO playerData;
+    private BoxCollider2D player_Collider;
 
     [Space]
 
     [Header("Managers")]
-    [System.NonSerialized] public AgentHealthManager healthManager;
-    [System.NonSerialized] public AgentRespawnManager respawnManager;
+    [System.NonSerialized] public PlayerCollectibleManager collectibleManager;
+    [System.NonSerialized] public PlayerRespawnManager respawnManager;
 
     [Space]
 
-    [Header("Events")]
-    public UnityEvent OnRespawnRequired;
-
     [Header("External Objects")]
-
     [SerializeField] private CinemachineCamera cinemachineCamera;
-    public GameObject enemyBlast;
     public RawImage rawImage;
+    [SerializeField] private GameObject dustParticles;
 
     [Header("Camera Controls")]
     public float minZoom;
     public float maxZoom;
-
-    [Header("Movement Data")]
-    [Space]
-    public float speed;
-    [SerializeField] private GameObject dustParticles;
-
 
     [Header("Jump Data")]
     [Space]
@@ -49,13 +36,30 @@ public class Player_Controller : MonoBehaviour
     public bool isJumpPressed;
     public Transform groundCheckPoint;
     public LayerMask whatIsGround;
-    public float jumpForce = 12f;          // Initial jump force
-    public float maxJumpTime = 0.25f;      // Maximum time to hold jump
-    public float jumpMultiplier = 30f;     // Extra force while holding jump
-    public float gravityMultiplier = 35f;  // Gravity increase for fast falling
-    public float maxFallSpeed = 18f;       // Limits max falling speed
+    public float jumpForce = 12f;
+    public float maxJumpTime = 0.25f;
+    public float jumpMultiplier = 30f;
+    public float gravityMultiplier = 35f;
+    public float maxFallSpeed = 18f;
     private float jumpTimeCounter;
     private bool isJumping;
+
+    [Space]
+
+    [Header("Player Data")]
+    public float speed;
+    private Vector2 movementVector;
+
+    [Header("Player Sounds")]
+    public AudioClip jumpSound;
+
+    [Header("Knockback Settings")]
+    public float knockbackForce = 10f;
+    public float knockbackLength;
+    private float knockbackCounter;
+
+    private bool stopInput;
+
 
 
     private void Awake()
@@ -66,19 +70,31 @@ public class Player_Controller : MonoBehaviour
     void Start()
     {
         GameManager.Instance.currentGameStates = GameStates.isPlaying;
+        MusicManager.Instance.PlayMusic(MusicManager.Instance.mainLevel);
         InitialisePlayer();
     }
 
     void Update()
     {
-        CheckForGround();
-        DustParticles();
-        PlayJumpAnimation();
+        if (knockbackCounter <= 0)
+        {
+            CheckForGround();
+            DustParticles();
+            PlayJumpAnimation();
+        }
+        else
+        {
+            knockbackCounter -= Time.deltaTime;
+        }
     }
 
     void FixedUpdate()
     {
-        HandleJump();
+        if (knockbackCounter <= 0)
+        {
+            PlayerMove();
+            HandleJump();
+        }
     }
 
     void LateUpdate()
@@ -91,16 +107,21 @@ public class Player_Controller : MonoBehaviour
         player_Anim = GetComponent<Animator>();
         player_RB = GetComponent<Rigidbody2D>();
         player_SR = GetComponent<SpriteRenderer>();
+        player_Collider = GetComponent<BoxCollider2D>();
 
-        healthManager = GetComponent<AgentHealthManager>();
-        respawnManager = GetComponent<AgentRespawnManager>();
-        //healthManager.InitializeHealth(playerData.health);
-        //respawnManager.InitializeSpawnPoint(playerData.spawnPoint, transform.position);
+        collectibleManager = GetComponent<PlayerCollectibleManager>();
+        respawnManager = GetComponent<PlayerRespawnManager>();
+        collectibleManager.InitializeHealth();
     }
 
     public void HandleMovement(InputAction.CallbackContext context)
     {
-        player_RB.linearVelocity = new Vector2(speed * context.ReadValue<Vector2>().x, player_RB.linearVelocity.y);
+        movementVector = new Vector2(context.ReadValue<Vector2>().x, 0);
+    }
+
+    public void PlayerMove()
+    {
+        player_RB.linearVelocity = new Vector2(speed * movementVector.x, player_RB.linearVelocity.y);
         ChangePlayerSpriteDirection(player_RB.linearVelocity);
         player_Anim.SetFloat("MOVE_SPEED", Mathf.Abs(player_RB.linearVelocity.x));
     }
@@ -112,6 +133,7 @@ public class Player_Controller : MonoBehaviour
             isJumping = true;
             jumpTimeCounter = maxJumpTime;
             player_RB.linearVelocity = new Vector2(player_RB.linearVelocity.x, jumpForce);
+            SFXManager.Instance.PlaySound(jumpSound);
         }
         else if (context.canceled)
         {
@@ -199,23 +221,6 @@ public class Player_Controller : MonoBehaviour
         }
     }
 
-    public void PlayerDied()
-    {
-        gameObject.SetActive(false);
-        SceneManagement.Instance.LoadScene(rawImage, SceneList.GameOver.ToString());
-
-    }
-
-    public void PlayerPitFall()
-    {
-        OnRespawnRequired?.Invoke();
-    }
-
-    public void PlayerHit()
-    {
-
-    }
-
     private void PlayerCamZoom()
     {
         if (Mathf.Abs(player_RB.linearVelocity.x) > 0.1f || Mathf.Abs(player_RB.linearVelocity.y) > 0.1f)
@@ -225,6 +230,47 @@ public class Player_Controller : MonoBehaviour
         else
         {
             cinemachineCamera.Lens.OrthographicSize = Mathf.Lerp(cinemachineCamera.Lens.OrthographicSize, minZoom, Time.deltaTime * 2f);
+        }
+    }
+
+    public void PlayerDied()
+    {
+        gameObject.SetActive(false);
+        SceneManagement.Instance.LoadScene(rawImage, SceneList.GameOver.ToString());
+
+    }
+
+    public void PlayerPitFall()
+    {
+        StartCoroutine(SceneManagement.Instance.FadeToBlackUI(rawImage));
+        respawnManager.RespawnPlayer(this);
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Pitfall"))
+        {
+            collectibleManager.RemoveHealth();
+            PlayerPitFall();
+        }
+    }
+
+    public void KnockBackForce()
+    {
+        knockbackCounter = knockbackLength;
+        KnockBackForceDirection();
+    }
+
+    public void KnockBackForceDirection()
+    {
+        if (player_SR.flipX)
+        {
+            player_RB.linearVelocity = new Vector2(knockbackForce, knockbackForce);
+        }
+
+        else
+        {
+            player_RB.linearVelocity = new Vector2(-knockbackForce, knockbackForce);
         }
     }
 }

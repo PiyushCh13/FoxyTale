@@ -26,7 +26,7 @@ public class SceneManagement : Singleton<SceneManagement>
     {
         prevScene = SceneManager.GetActiveScene();
 
-        StartCoroutine(FadeToBlack(image, sceneName));
+        StartCoroutine(FadeToBlackSceneChange(image, sceneName));
 
         if (prevScene != SceneManager.GetActiveScene() && prevScene != null)
         {
@@ -34,7 +34,7 @@ public class SceneManagement : Singleton<SceneManagement>
         }
     }
 
-    IEnumerator FadeToBlack(RawImage image , string sceneName) 
+    IEnumerator FadeToBlackSceneChange(RawImage image , string sceneName) 
     {
         image.gameObject.SetActive(true);
         image.canvasRenderer.SetAlpha(0.0f);
@@ -42,6 +42,18 @@ public class SceneManagement : Singleton<SceneManagement>
         yield return new WaitForSeconds(0.5f);
         image.canvasRenderer.SetAlpha(1.0f);
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        yield return new WaitForSeconds(0.5f);
+        image.CrossFadeAlpha(0f, 0.2f, true);
+        image.gameObject.SetActive(false);
+    }
+
+    public IEnumerator FadeToBlackUI(RawImage image)
+    {
+        image.gameObject.SetActive(true);
+        image.canvasRenderer.SetAlpha(0.0f);
+        image.CrossFadeAlpha(1f, 0.2f, true);
+        yield return new WaitForSeconds(0.5f);
+        image.canvasRenderer.SetAlpha(1.0f);
         yield return new WaitForSeconds(0.5f);
         image.CrossFadeAlpha(0f, 0.2f, true);
         image.gameObject.SetActive(false);

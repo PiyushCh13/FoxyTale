@@ -1,21 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Spikes : MonoBehaviour
 {
-    void Start()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
-    }
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (other.GetComponent<PlayerCollectibleManager>().isInvisible)
+                return;
 
-    void Update()
-    {
-        
-    }
+            other.GetComponent<PlayerCollectibleManager>().RemoveHealth();
+            other.GetComponent<Player_Controller>().KnockBackForce();
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
+            SFXManager.Instance.PlaySound(SFXManager.Instance.playerHurt);
+        }
 
     }
 }

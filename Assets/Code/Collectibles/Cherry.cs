@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Cherry : Pickable
 {
-    // public override void Pickup(Agent agent)
-    // {
-    //     AgentHealthManager manager = agent.GetComponent<AgentHealthManager>();
+    [SerializeField] public AudioClip cherryPickup;
+    public override void Pickup(Player_Controller player)
+    {
+        PlayerCollectibleManager manager = player.GetComponent<PlayerCollectibleManager>();
 
-    //     if (manager != null)
-    //     {
-    //         manager.AddHealth();
-    //     }
-    // }
+        if (manager != null)
+        {
+            manager.AddHealth();
+            SFXManager.Instance.PlaySound(cherryPickup);
+        }
+    }
 }

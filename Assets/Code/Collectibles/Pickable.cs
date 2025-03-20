@@ -5,14 +5,19 @@ using UnityEngine;
 
 public abstract class Pickable : MonoBehaviour
 {
-    // public abstract void Pickup(Agent agent);
+    public LevelDataSO levelOne;
+    public LevelDataSO levelTwo;
+    public LevelDataSO levelThree;
+    public LevelDataSO bossLevel;
+    
+    public abstract void Pickup(Player_Controller player);
 
-    // private void OnTriggerEnter2D(Collider2D collision)
-    // {
-    //     if (collision.CompareTag("Player"))
-    //     {
-    //         Pickup(collision.GetComponent<Agent>());
-    //         Destroy(gameObject);
-    //     }
-    // }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            Pickup(collision.GetComponent<Player_Controller>());
+            Destroy(gameObject);
+        }
+    }
 }

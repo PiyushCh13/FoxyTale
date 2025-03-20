@@ -19,14 +19,18 @@ public class MainMenuManager : MonoBehaviour
 
     public void StartGame() 
     {
+        GameManager.Instance.LoadLevelData();
         SFXManager.Instance.PlaySound(SFXManager.Instance.clickSound);
         SceneManagement.Instance.LoadScene(image, SceneList.LevelSelection.ToString());
     }
 
     public void NewGame()
     {
+        LevelDataManager.Instance.ResetLevelData();
+        GameManager.Instance.unlockedLevels.Clear();
         SFXManager.Instance.PlaySound(SFXManager.Instance.clickSound);
         SceneManagement.Instance.LoadScene(image, SceneList.LevelOne.ToString());
+        PlayerPrefs.DeleteAll();
     }
 
     public void Settings() 

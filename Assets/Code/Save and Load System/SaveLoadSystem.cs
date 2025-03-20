@@ -7,7 +7,7 @@ public static class SaveLoadSystem
 {
     public static readonly string SAVE_FOLDER_NONEDITOR = Application.persistentDataPath + "/Saves/";
 
-    public static void InitialiseData()
+    public static void InitialiseData(List<LevelDataSO> levelDatas)
     {
         bool directoryExists;
         directoryExists = Directory.Exists(SAVE_FOLDER_NONEDITOR);
@@ -16,13 +16,7 @@ public static class SaveLoadSystem
         {
             Directory.CreateDirectory(SAVE_FOLDER_NONEDITOR);
 
-            SaveData saveData = new SaveData
-            {
-                HIGH_SCORE = 0,
-                SFX_SLIDER = 0.5f,
-                MUSIC_SLIDER = 0.5f,
-            };
-
+            SaveData saveData = new SaveData(0.5f, 0.5f , levelDatas);
             string json = JsonUtility.ToJson(saveData);
             SaveData(json);
         }
@@ -40,6 +34,7 @@ public static class SaveLoadSystem
         if (File.Exists(SAVE_FOLDER_NONEDITOR + "/Save.json"))
         {
             string savestring = File.ReadAllText(SAVE_FOLDER_NONEDITOR + "/Save.json");
+            SaveData saveData = JsonUtility.FromJson<SaveData>(savestring);
             return savestring;
         }
         else

@@ -3,7 +3,12 @@ guid: 9a2f4e60590147d4d95c4ef52c4378dc
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - levelOne: {instanceID: 0}
+  - levelTwo: {instanceID: 0}
+  - levelThree: {instanceID: 0}
+  - bossLevel: {instanceID: 0}
+  - explosionObject: {fileID: 8798785058550998060, guid: d80e41abf4ef19946ba13df33038aeed, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

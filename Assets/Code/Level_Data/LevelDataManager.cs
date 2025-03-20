@@ -6,11 +6,59 @@ using UnityEngine;
 public class LevelDataManager : Singleton<LevelDataManager>
 {
     public LevelDataSO levelOne, levelTwo, levelThree, bossLevel;
-    public LevelDataSO GetLevelData(LevelList levelList) => levelList switch
+    public LevelDataSO UpdateLevelData(LevelList levelList , LevelDataSO updatedSO)
     {
-        LevelList.LevelOne => levelOne,
-        LevelList.LevelTwo => levelTwo,
-        LevelList.LevelThree => levelThree,
-        LevelList.BossLevel => bossLevel
-    };
+        switch(levelList)
+        {
+            case LevelList.LevelOne:
+                levelOne.diamondsCollected = updatedSO.diamondsCollected;
+                levelOne.isUnlocked = updatedSO.isUnlocked;
+                return levelOne;
+            case LevelList.LevelTwo:
+                levelTwo.diamondsCollected = updatedSO.diamondsCollected;
+                levelTwo.isUnlocked = updatedSO.isUnlocked;
+                return levelTwo;
+            case LevelList.LevelThree:
+                levelThree.diamondsCollected = updatedSO.diamondsCollected;
+                levelThree.isUnlocked = updatedSO.isUnlocked;
+                return levelThree;
+            case LevelList.BossLevel:
+                bossLevel.diamondsCollected = updatedSO.diamondsCollected;
+                bossLevel.isUnlocked = updatedSO.isUnlocked;
+                return bossLevel;
+            default:
+                return null;
+        }
+    }
+
+    public LevelDataSO GetLevelData(LevelList levelList)
+    {
+        switch(levelList)
+        {
+            case LevelList.LevelOne:
+                return levelOne;
+            case LevelList.LevelTwo:
+                return levelTwo;
+            case LevelList.LevelThree:
+                return levelThree;
+            case LevelList.BossLevel:
+                return bossLevel;
+            default:
+                return null;
+        }
+    }
+
+    public void ResetLevelData()
+    {
+        levelOne.diamondsCollected = 0;
+        levelTwo.diamondsCollected = 0;
+        levelThree.diamondsCollected = 0;
+        bossLevel.diamondsCollected = 0;
+
+        levelOne.isUnlocked = true;
+        levelTwo.isUnlocked = false;
+        levelThree.isUnlocked = false;
+        bossLevel.isUnlocked = false;
+    }
+
 }

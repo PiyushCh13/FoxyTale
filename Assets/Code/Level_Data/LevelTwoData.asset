@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: LevelTwoData
   m_EditorClassIdentifier: 
   levelName: 4
-  isUnlocked: 1
+  isUnlocked: 0
   diamondsCollected: 0
   diamondsTotal: 100
