@@ -10,7 +10,7 @@ A charming 2D platformer where a clever fox saves the forest. Foxy Tale is a sto
 2. Open it in Unity
 3. Press `Play` to start in the Unity Editor
 
-> Optional: You can also download and play the standalone build from https://piyushch13.itch.io/
+> Optional: You can also download and play the standalone build from https://piyushch13.itch.io/foxy-tale
 
 ---
 
