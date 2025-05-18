@@ -66,10 +66,6 @@ public class Boss : MonoBehaviour
         if (currentState == BossState.Ended) return;
 
         StateMachine();
-
-#if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.H)) TakeHit();
-#endif
     }
 
     private void StateMachine()

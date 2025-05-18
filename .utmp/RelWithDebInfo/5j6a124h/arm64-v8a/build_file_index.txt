@@ -1,0 +1,3 @@
+F:\Game Development\Unity Engine\My Unity Project Files\FoxyTale\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+F:\Game Development\Unity Engine\My Unity Project Files\FoxyTale\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\FramePacing\CMakeLists.txt
+F:\Game Development\Unity Engine\My Unity Project Files\FoxyTale\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt

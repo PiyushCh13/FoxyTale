@@ -21,27 +21,40 @@ public class LevelEnd : MonoBehaviour
 
             else
             {
+                Debug.Log("Level End Triggered");
                 Player_Controller player = collision.gameObject.GetComponent<Player_Controller>();
                 PlayerCollectibleManager playerCollectibleManager = collision.gameObject.GetComponent<PlayerCollectibleManager>();
 
-                if (player != null)
+                LevelDataSO currentLeveldata = LevelDataManager.Instance.GetLevelData(currentLevel);
+
+                if (currentLeveldata != null)
                 {
-                    SceneManagement.Instance.LoadScene(player.rawImage, SceneList.LevelSelection.ToString());
+                    currentLeveldata.diamondsCollected = Mathf.Clamp(playerCollectibleManager.gemCount, 0, currentLeveldata.diamondsTotal);
+                    currentLeveldata.isUnlocked = true;
                 }
 
-                LevelDataSO currentLeveldata = new LevelDataSO();
-                currentLeveldata.diamondsCollected = Mathf.Clamp(0, playerCollectibleManager.gemCount, currentLeveldata.diamondsTotal);
-                currentLeveldata.isUnlocked = true;
+                Debug.Log("Current Level Data: " + currentLeveldata.diamondsCollected + " / " + currentLeveldata.isUnlocked);
+                
+                LevelDataSO nextLevelData = LevelDataManager.Instance.GetLevelData(nextLevel);
+                if (nextLevelData != null)
+                {
+                    nextLevelData.isUnlocked = true;
+                }
 
-                LevelDataSO nextLevelData = new LevelDataSO();
-                nextLevelData.isUnlocked = true;
+                Debug.Log("Next Level: " + nextLevelData.diamondsCollected + " / " + nextLevelData.isUnlocked);
 
                 LevelDataManager.Instance.UpdateLevelData(currentLevel, currentLeveldata);
 
                 LevelDataManager.Instance.UpdateLevelData(nextLevel, nextLevelData);
 
                 GameManager.Instance.AddUnlockLevel(nextLevel);
+
                 GameManager.Instance.SaveLevelData(currentLevel);
+
+                if (player != null)
+                {
+                    SceneManagement.Instance.LoadScene(player.rawImage, SceneList.LevelSelection.ToString());
+                }
             }
         }
     }

@@ -80,6 +80,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentGameStates: 3
   unlockedLevels: []
+  isMobile: 0
+  mobileControlsPrefab: {fileID: 5078604741606984859, guid: fc74882349955014983403af6c7609e8, type: 3}
 --- !u!1 &2919817056097953492
 GameObject:
   m_ObjectHideFlags: 0

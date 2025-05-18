@@ -12,8 +12,19 @@ public class UIInputHandler : MonoBehaviour
     [HideInInspector] public Vector2 OnLevelPlayerMove { get; private set; }
     public event Action<Vector2> OnLevelPlayerMoveAction;
 
+    public GameObject mobileControlsPrefab;
+
+    void Start()
+    {
+        if(GameManager.Instance.isMobile)
+        {
+            Instantiate(mobileControlsPrefab);
+        }
+    }
+
     public void Pressed(InputAction.CallbackContext context)
     {
+        Debug.Log("Pressed");
         if (context.performed)
         {
             OnPress?.Invoke();

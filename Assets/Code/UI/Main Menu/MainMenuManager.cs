@@ -29,8 +29,8 @@ public class MainMenuManager : MonoBehaviour
         LevelDataManager.Instance.ResetLevelData();
         GameManager.Instance.unlockedLevels.Clear();
         SFXManager.Instance.PlaySound(SFXManager.Instance.clickSound);
-        SceneManagement.Instance.LoadScene(image, SceneList.LevelOne.ToString());
         PlayerPrefs.DeleteAll();
+        SceneManagement.Instance.LoadScene(image, SceneList.LevelOne.ToString());
     }
 
     public void Settings() 

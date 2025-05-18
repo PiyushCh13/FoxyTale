@@ -3397,7 +3397,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0.8666667, b: 0.91764706, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -5622,6 +5622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a14a44afc527ee42b68335f834de440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobileControlsPrefab: {fileID: 5078604741606984859, guid: fc74882349955014983403af6c7609e8, type: 3}
 --- !u!114 &1958122687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5655,10 +5656,6 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 5b0e9226-8465-4a13-b319-c4853cf50f22
     m_ActionName: 'Player/Jump[/Keyboard/space,/XInputControllerWindows/buttonSouth]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5742ab03-191f-49df-86e1-5e826b5ee650
-    m_ActionName: 'Player/Double Jump[/Keyboard/space,/XInputControllerWindows/buttonSouth]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 3a1b0a7a-53af-4e4d-9c90-81b858534429

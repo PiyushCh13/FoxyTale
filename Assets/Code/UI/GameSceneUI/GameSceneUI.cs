@@ -7,6 +7,20 @@ using UnityEngine;
 public class GameSceneUI : MonoBehaviour
 {
     [SerializeField] GameObject pausePanel;
+    [SerializeField] GameObject androidControlsPrefab;
+
+    void Start()
+    {
+        if(GameManager.Instance.isMobile)
+        {
+            androidControlsPrefab.SetActive(true);
+        }
+
+        else
+        {
+            androidControlsPrefab.SetActive(false);
+        }
+    }
 
     public void PauseMenu() 
     {

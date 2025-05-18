@@ -101771,11 +101771,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 295502257531188098, guid: 905748d4eeb0d0b4b8c3bc8bac9befe2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.8430684
+      value: 2.8902707
+      objectReference: {fileID: 0}
+    - target: {fileID: 295502257531188098, guid: 905748d4eeb0d0b4b8c3bc8bac9befe2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.4389606
       objectReference: {fileID: 0}
     - target: {fileID: 1127435753359323040, guid: 905748d4eeb0d0b4b8c3bc8bac9befe2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.8430684
+      value: 2.8902707
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127435753359323040, guid: 905748d4eeb0d0b4b8c3bc8bac9befe2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.4389606
       objectReference: {fileID: 0}
     - target: {fileID: 2198256123642663157, guid: 905748d4eeb0d0b4b8c3bc8bac9befe2, type: 3}
       propertyPath: gemText
@@ -101824,6 +101832,14 @@ PrefabInstance:
     - target: {fileID: 3765444027136251539, guid: 905748d4eeb0d0b4b8c3bc8bac9befe2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383136664093637350, guid: 905748d4eeb0d0b4b8c3bc8bac9befe2, type: 3}
+      propertyPath: orthographic size
+      value: 8.129869
+      objectReference: {fileID: 0}
+    - target: {fileID: 5917611958685970716, guid: 905748d4eeb0d0b4b8c3bc8bac9befe2, type: 3}
+      propertyPath: Lens.OrthographicSize
+      value: 8.129869
       objectReference: {fileID: 0}
     - target: {fileID: 6549077399563913449, guid: 905748d4eeb0d0b4b8c3bc8bac9befe2, type: 3}
       propertyPath: m_Name

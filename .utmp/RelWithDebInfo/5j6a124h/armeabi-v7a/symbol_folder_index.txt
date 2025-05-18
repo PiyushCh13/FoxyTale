@@ -1,0 +1,1 @@
+F:\Game Development\Unity Engine\My Unity Project Files\FoxyTale\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\build\intermediates\cxx\RelWithDebInfo\5j6a124h\obj\armeabi-v7a
